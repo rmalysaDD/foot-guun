@@ -1,0 +1,456 @@
+:root {
+  --bg: #0b0c0d;
+  --panel: #151719;
+  --border: #292b2d;
+  --text: #f2f2f2;
+  --muted: #9aa0a6;
+  --accent: #02898d;
+  --accent-hover: #03a5aa;
+  --placeholder: #5f656b;
+  --radius: 12px;
+  --page-padding: 20px;
+  --gap: 20px;
+  --panel-padding: 20px;
+  --signature-width: 368px;
+  /* border-collapse renders half of the outer 1px border outside the table, so it is 1px wider. */
+  --column-width: calc(
+    var(--signature-width) + 1px + 2 * var(--panel-padding) + 2px
+  );
+  --page-width: calc(
+    2 * var(--column-width) + var(--gap) + 2 * var(--page-padding)
+  );
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+    sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.header {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 32px var(--page-padding) 8px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.theme-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  padding: 4px 0;
+  background: none;
+  border: 0;
+  color: var(--muted);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.theme-switch:focus-visible {
+  outline: 2px solid var(--accent-hover);
+  outline-offset: 4px;
+  border-radius: 999px;
+}
+
+.theme-switch-track {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  background: var(--border);
+  border-radius: 999px;
+  transition: background-color 0.15s;
+}
+
+.theme-switch-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
+  transition: transform 0.15s;
+}
+
+.theme-switch[aria-checked="true"] .theme-switch-track {
+  background: var(--accent);
+}
+
+.theme-switch[aria-checked="true"] .theme-switch-thumb {
+  transform: translateX(18px);
+}
+
+.brand {
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+}
+
+.brand-accent {
+  color: var(--accent);
+}
+
+.badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 8px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.5;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.tagline {
+  margin: 4px 0 0;
+  color: var(--muted);
+}
+
+.app {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: var(--page-padding);
+  display: grid;
+  gap: var(--gap);
+}
+
+.columns,
+.exports {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, var(--column-width)));
+  gap: var(--gap);
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--panel-padding);
+  min-width: 0;
+}
+
+.panel-title {
+  margin: 0 0 16px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.form {
+  display: grid;
+  gap: 14px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field-label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.field input {
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font: inherit;
+}
+
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.radio-group legend {
+  width: 100%;
+  margin-bottom: 6px;
+  padding: 0;
+}
+
+.radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.field .radio input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  padding: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.field input::placeholder {
+  color: var(--placeholder);
+}
+
+.field input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgb(2 137 141 / 25%);
+}
+
+.preview-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 24px;
+  margin-bottom: 16px;
+}
+
+.preview-head .panel-title {
+  margin: 0;
+}
+
+.preview-theme-switch {
+  padding: 0;
+}
+
+.preview-theme-label {
+  transition: color 0.15s;
+}
+
+.preview-theme-switch[aria-checked="false"] .preview-theme-dark,
+.preview-theme-switch[aria-checked="true"] .preview-theme-light {
+  color: inherit;
+  font-weight: 600;
+}
+
+/* The signature sets no text or background colors, so the panel stands in for the mail client. */
+.client-preview[data-client="light"] {
+  background: #ffffff;
+  color: #1f1f1f;
+}
+
+.preview-frame {
+  overflow-x: auto;
+}
+
+/* Reset inherited app styles so the preview matches what mail clients render. */
+.preview {
+  font-size: 16px;
+  line-height: normal;
+}
+
+.preview,
+.preview * {
+  box-sizing: content-box;
+}
+
+/* Keep the signature at its designed width; the frame scrolls instead of squashing it. */
+.preview > table {
+  min-width: var(--signature-width);
+}
+
+.export {
+  display: flex;
+  flex-direction: column;
+}
+
+.export-title {
+  margin-bottom: 8px;
+}
+
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.export .btn-group {
+  margin-top: auto;
+}
+
+.hint {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.code {
+  width: 100%;
+  flex: 1;
+  min-height: 140px;
+  padding: 10px 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--muted);
+  font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  resize: vertical;
+}
+
+.btn {
+  padding: 8px 16px;
+  background: var(--accent);
+  border: 0;
+  border-radius: 8px;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.btn:hover {
+  background: var(--accent-hover);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--accent-hover);
+  outline-offset: 2px;
+}
+
+.btn-secondary {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--accent);
+  color: var(--accent);
+}
+
+.btn-secondary:hover {
+  background: rgb(2 137 141 / 12%);
+}
+
+.dialog {
+  width: min(720px, calc(100vw - 2 * var(--page-padding)));
+  padding: 0;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+}
+
+.dialog::backdrop {
+  background: rgb(0 0 0 / 60%);
+}
+
+.dialog-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: var(--panel-padding);
+}
+
+.dialog-body .btn-group {
+  margin: 0;
+}
+
+.dialog-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.dialog-head .panel-title {
+  margin: 0;
+}
+
+.dialog-head form {
+  margin: 0;
+}
+
+.dialog-close {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.dialog-close:hover {
+  background: var(--border);
+  color: var(--text);
+}
+
+.dialog .code {
+  min-height: 320px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  padding: 10px 18px;
+  background: var(--accent);
+  border-radius: 999px;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 40%);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 8px);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.toast.is-error {
+  background: #b3261e;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --page-width: calc(var(--column-width) + 2 * var(--page-padding));
+  }
+
+  .columns,
+  .exports {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --page-padding: 12px;
+    --gap: 12px;
+    --panel-padding: 14px;
+  }
+
+  .header {
+    padding-top: 24px;
+    padding-bottom: 4px;
+  }
+}
